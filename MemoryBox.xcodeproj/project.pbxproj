@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		049E00FA2426327B002E0933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E00F92426327B002E0933 /* AppDelegate.swift */; };
 		049E00FC2426327B002E0933 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E00FB2426327B002E0933 /* SceneDelegate.swift */; };
-		049E00FE2426327B002E0933 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E00FD2426327B002E0933 /* ViewController.swift */; };
-		049E01012426327B002E0933 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049E00FF2426327B002E0933 /* Main.storyboard */; };
 		049E01032426328E002E0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049E01022426328E002E0933 /* Assets.xcassets */; };
 		049E01062426328E002E0933 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049E01042426328E002E0933 /* LaunchScreen.storyboard */; };
 		049E01112426328F002E0933 /* MemoryBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E01102426328F002E0933 /* MemoryBoxTests.swift */; };
+		049E011E24263C0F002E0933 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E011D24263C0F002E0933 /* WelcomeViewController.swift */; };
+		049E012024263C37002E0933 /* MemoriesViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E011F24263C37002E0933 /* MemoriesViewControllerViewController.swift */; };
+		049E012224263CFC002E0933 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E012124263CFC002E0933 /* MemoryCell.swift */; };
+		049E012624264613002E0933 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E012524264613002E0933 /* AppFlowCoordinator.swift */; };
+		049E012A24264937002E0933 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E012924264937002E0933 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,14 +33,17 @@
 		049E00F62426327B002E0933 /* MemoryBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049E00F92426327B002E0933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		049E00FB2426327B002E0933 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		049E00FD2426327B002E0933 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		049E01002426327B002E0933 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		049E01022426328E002E0933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		049E01052426328E002E0933 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		049E01072426328E002E0933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		049E010C2426328F002E0933 /* MemoryBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		049E01102426328F002E0933 /* MemoryBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBoxTests.swift; sourceTree = "<group>"; };
 		049E01122426328F002E0933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		049E011D24263C0F002E0933 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		049E011F24263C37002E0933 /* MemoriesViewControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesViewControllerViewController.swift; sourceTree = "<group>"; };
+		049E012124263CFC002E0933 /* MemoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
+		049E012524264613002E0933 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		049E012924264937002E0933 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0497B71224268DDF00B9EBA0 /* Memory */ = {
+			isa = PBXGroup;
+			children = (
+				049E011F24263C37002E0933 /* MemoriesViewControllerViewController.swift */,
+			);
+			path = Memory;
+			sourceTree = "<group>";
+		};
 		049E00ED2426327B002E0933 = {
 			isa = PBXGroup;
 			children = (
@@ -79,13 +93,12 @@
 		049E00F82426327B002E0933 /* MemoryBox */ = {
 			isa = PBXGroup;
 			children = (
-				049E00F92426327B002E0933 /* AppDelegate.swift */,
-				049E00FB2426327B002E0933 /* SceneDelegate.swift */,
-				049E00FD2426327B002E0933 /* ViewController.swift */,
-				049E00FF2426327B002E0933 /* Main.storyboard */,
+				049E0124242645E9002E0933 /* Application */,
+				049E0127242648D6002E0933 /* Scenes */,
 				049E01022426328E002E0933 /* Assets.xcassets */,
 				049E01042426328E002E0933 /* LaunchScreen.storyboard */,
 				049E01072426328E002E0933 /* Info.plist */,
+				049E012124263CFC002E0933 /* MemoryCell.swift */,
 			);
 			path = MemoryBox;
 			sourceTree = "<group>";
@@ -97,6 +110,34 @@
 				049E01122426328F002E0933 /* Info.plist */,
 			);
 			path = MemoryBoxTests;
+			sourceTree = "<group>";
+		};
+		049E0124242645E9002E0933 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				049E00F92426327B002E0933 /* AppDelegate.swift */,
+				049E00FB2426327B002E0933 /* SceneDelegate.swift */,
+				049E012524264613002E0933 /* AppFlowCoordinator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		049E0127242648D6002E0933 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				049E0128242648ED002E0933 /* Welcome */,
+				0497B71224268DDF00B9EBA0 /* Memory */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		049E0128242648ED002E0933 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				049E011D24263C0F002E0933 /* WelcomeViewController.swift */,
+				049E012924264937002E0933 /* WelcomeView.swift */,
+			);
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,7 +223,6 @@
 			files = (
 				049E01062426328E002E0933 /* LaunchScreen.storyboard in Resources */,
 				049E01032426328E002E0933 /* Assets.xcassets in Resources */,
-				049E01012426327B002E0933 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,9 +240,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049E00FE2426327B002E0933 /* ViewController.swift in Sources */,
+				049E012024263C37002E0933 /* MemoriesViewControllerViewController.swift in Sources */,
+				049E011E24263C0F002E0933 /* WelcomeViewController.swift in Sources */,
 				049E00FA2426327B002E0933 /* AppDelegate.swift in Sources */,
 				049E00FC2426327B002E0933 /* SceneDelegate.swift in Sources */,
+				049E012624264613002E0933 /* AppFlowCoordinator.swift in Sources */,
+				049E012224263CFC002E0933 /* MemoryCell.swift in Sources */,
+				049E012A24264937002E0933 /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,14 +269,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		049E00FF2426327B002E0933 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				049E01002426327B002E0933 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		049E01042426328E002E0933 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -363,6 +399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V8ZG3WLBMM;
 				INFOPLIST_FILE = MemoryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -380,6 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V8ZG3WLBMM;
 				INFOPLIST_FILE = MemoryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
