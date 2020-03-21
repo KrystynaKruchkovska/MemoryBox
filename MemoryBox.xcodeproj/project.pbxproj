@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0497B7142426916800B9EBA0 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B7132426916800B9EBA0 /* WelcomeViewModel.swift */; };
+		0497B71724269B2400B9EBA0 /* PermissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B71624269B2400B9EBA0 /* PermissionHandler.swift */; };
 		049E00FA2426327B002E0933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E00F92426327B002E0933 /* AppDelegate.swift */; };
 		049E00FC2426327B002E0933 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E00FB2426327B002E0933 /* SceneDelegate.swift */; };
 		049E01032426328E002E0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049E01022426328E002E0933 /* Assets.xcassets */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0497B7132426916800B9EBA0 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		0497B71624269B2400B9EBA0 /* PermissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionHandler.swift; sourceTree = "<group>"; };
 		049E00F62426327B002E0933 /* MemoryBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049E00F92426327B002E0933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		049E00FB2426327B002E0933 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			children = (
 				049E0128242648ED002E0933 /* Welcome */,
 				0497B71224268DDF00B9EBA0 /* Memory */,
+				0497B71624269B2400B9EBA0 /* PermissionHandler.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 			children = (
 				049E011D24263C0F002E0933 /* WelcomeViewController.swift */,
 				049E012924264937002E0933 /* WelcomeView.swift */,
+				0497B7132426916800B9EBA0 /* WelcomeViewModel.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -241,8 +247,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				049E012024263C37002E0933 /* MemoriesViewControllerViewController.swift in Sources */,
+				0497B7142426916800B9EBA0 /* WelcomeViewModel.swift in Sources */,
 				049E011E24263C0F002E0933 /* WelcomeViewController.swift in Sources */,
 				049E00FA2426327B002E0933 /* AppDelegate.swift in Sources */,
+				0497B71724269B2400B9EBA0 /* PermissionHandler.swift in Sources */,
 				049E00FC2426327B002E0933 /* SceneDelegate.swift in Sources */,
 				049E012624264613002E0933 /* AppFlowCoordinator.swift in Sources */,
 				049E012224263CFC002E0933 /* MemoryCell.swift in Sources */,
