@@ -30,7 +30,8 @@ class AppFlowCoordinator: Coordinator {
     }
 
     private func runMainScreen() {
-        let vc = WelcomeViewController(delegate: self)
+        let vc = WelcomeViewController(delegate: self,viewModel: WelcomeViewModel())
+        vc.title = ControllerTitle.welcomeVC.rawValue
         rootViewController.show(vc, sender: nil)
        
     }
@@ -47,4 +48,8 @@ extension AppFlowCoordinator: WelcomeViewControllerdelegate {
     }
 }
 
+
+enum ControllerTitle: String {
+    case welcomeVC = "Welcome"
+}
 

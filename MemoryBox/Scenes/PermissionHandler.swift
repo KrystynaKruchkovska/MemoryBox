@@ -41,29 +41,39 @@ extension PermissionError: LocalizedError {
 }
 
 
-protocol PhotoPermission {
-    func requestPhotosPermissions(complition: @escaping (_ error:Error?) -> ())
-}
-protocol RecordPermission {
-    func requestRecordPermissions(complition: @escaping (_ error:Error?) -> ())
-}
-protocol TranscribePermissions {
-    func requestTranscribePermissions(complition: @escaping (_ error:Error?) -> ())
+protocol MemoryBoxPermission {
+    func requestAllPermisissions(complition: @escaping (_ error:Error?) -> ())
 }
 
-class UserPermission: PhotoPermission, RecordPermission, TranscribePermissions {
+class PermissionHandler: MemoryBoxPermission {
     
-    public private(set) var authorizationComplete: Bool = false
+    func requestAllPermisissions(complition: @escaping (_ error:Error?) -> ()) {
     
-    func requestPhotosPermissions(complition: @escaping (_ error:Error?) -> ()) {
-        PHPhotoLibrary.requestAuthorization { [unowned self] authStatus in
+        requestPhotosPermissions { (error) in
+            if let photoError = error {
+                complition(photoError)
+            }
+            self.requestRecordPermissions { (error) in
+                if let recordError = error {
+                    complition(recordError)
+                }
+                self.requestTranscribePermissions { (error) in
+                    if let transcribeError = error {
+                        complition(transcribeError)
+                    } else {
+                        complition(nil)
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    private func requestPhotosPermissions(complition: @escaping (_ error:Error?) -> ()) {
+        PHPhotoLibrary.requestAuthorization { authStatus in
             DispatchQueue.main.async {
                 if authStatus == .authorized {
-                    self.requestRecordPermissions { (error) in
-                        if let requestRecordError = error {
-                            complition(requestRecordError)
-                        }
-                    }
+                   complition(nil)
                 } else {
                     complition(PermissionError.photo)
                 }
@@ -71,15 +81,11 @@ class UserPermission: PhotoPermission, RecordPermission, TranscribePermissions {
         }
     }
     
-    func requestRecordPermissions(complition: @escaping (_ error:Error?) -> ()) {
-        AVAudioSession.sharedInstance().requestRecordPermission() { [unowned self] allowed in
+    private func requestRecordPermissions(complition: @escaping (_ error:Error?) -> ()) {
+        AVAudioSession.sharedInstance().requestRecordPermission() { allowed in
             DispatchQueue.main.async {
                 if allowed {
-                    self.requestTranscribePermissions { (error) in
-                        if let requestTranscribeError = error {
-                            complition(requestTranscribeError)
-                        }
-                    }
+                    complition(nil)
                 } else {
                     complition(PermissionError.recording)
                 }
@@ -87,11 +93,11 @@ class UserPermission: PhotoPermission, RecordPermission, TranscribePermissions {
         }
     }
     
-    func requestTranscribePermissions(complition: @escaping (_ error:Error?) -> ()) {
-        SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
+    private func requestTranscribePermissions(complition: @escaping (_ error:Error?) -> ()) {
+        SFSpeechRecognizer.requestAuthorization { authStatus in
             DispatchQueue.main.async {
                 if authStatus == .authorized {
-                    self.authorizationComplete = true
+                    complition(nil)
                 } else {
                     complition(PermissionError.transcription)
                 }

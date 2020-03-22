@@ -13,12 +13,6 @@ struct Font {
 }
 
 class WelcomeView: UIView {
-
-//    convenience init() {
-//        self.init()
-//        addSubviews()
-//        setupConstraints()
-//    }
     
     // MARK: initializers
     init() {
@@ -58,7 +52,6 @@ class WelcomeView: UIView {
     
     let textLabel: UILabel = {
         let label = UILabel()
-        //label.font = UIFont(name: Font.textFontName, size: 20)
         label.numberOfLines = 0
         label.text = "In order to work fully, Memory Box needs to read your photo library, record your voice, and transcribe what you said. When you click the button below you will be asked to grant those permissions, but you can change your mind later in Settings."
         label.translatesAutoresizingMaskIntoConstraints = false

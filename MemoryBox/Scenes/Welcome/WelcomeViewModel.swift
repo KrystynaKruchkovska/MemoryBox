@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+class WelcomeViewModel {
+    var permisionHandler: MemoryBoxPermission
+    
+    init() {
+        self.permisionHandler = PermissionHandler()
+    }
+    
+    func requestAllPermisissions(complition: @escaping (_ error:Error?) -> ()) {
+        permisionHandler.requestAllPermisissions { (error) in
+            if let error = error {
+                complition(error)
+            }
+            complition(nil)
+        }
+    }
+    
+    
+}
