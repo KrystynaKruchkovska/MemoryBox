@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04165CE92428D0930030C153 /* MemoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04165CE82428D0930030C153 /* MemoriesManager.swift */; };
+		04165CEB2428D76A0030C153 /* MemoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04165CEA2428D76A0030C153 /* MemoriesViewModel.swift */; };
+		043752E12428FD6F004765C2 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043752E02428FD6E004765C2 /* UIImage+Extensions.swift */; };
 		0497B7142426916800B9EBA0 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B7132426916800B9EBA0 /* WelcomeViewModel.swift */; };
 		0497B71724269B2400B9EBA0 /* PermissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B71624269B2400B9EBA0 /* PermissionHandler.swift */; };
+		0497B71B2427800700B9EBA0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B71A2427800700B9EBA0 /* UIView+Extensions.swift */; };
+		0497B71F2427861800B9EBA0 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B71E2427861800B9EBA0 /* SectionHeaderView.swift */; };
 		049E00FA2426327B002E0933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E00F92426327B002E0933 /* AppDelegate.swift */; };
 		049E00FC2426327B002E0933 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E00FB2426327B002E0933 /* SceneDelegate.swift */; };
 		049E01032426328E002E0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049E01022426328E002E0933 /* Assets.xcassets */; };
 		049E01062426328E002E0933 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049E01042426328E002E0933 /* LaunchScreen.storyboard */; };
 		049E01112426328F002E0933 /* MemoryBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E01102426328F002E0933 /* MemoryBoxTests.swift */; };
 		049E011E24263C0F002E0933 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E011D24263C0F002E0933 /* WelcomeViewController.swift */; };
-		049E012024263C37002E0933 /* MemoriesViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E011F24263C37002E0933 /* MemoriesViewControllerViewController.swift */; };
+		049E012024263C37002E0933 /* MemoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E011F24263C37002E0933 /* MemoriesViewController.swift */; };
 		049E012224263CFC002E0933 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E012124263CFC002E0933 /* MemoryCell.swift */; };
 		049E012624264613002E0933 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E012524264613002E0933 /* AppFlowCoordinator.swift */; };
 		049E012A24264937002E0933 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E012924264937002E0933 /* WelcomeView.swift */; };
@@ -32,8 +37,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04165CE82428D0930030C153 /* MemoriesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesManager.swift; sourceTree = "<group>"; };
+		04165CEA2428D76A0030C153 /* MemoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesViewModel.swift; sourceTree = "<group>"; };
+		043752E02428FD6E004765C2 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		0497B7132426916800B9EBA0 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		0497B71624269B2400B9EBA0 /* PermissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionHandler.swift; sourceTree = "<group>"; };
+		0497B71A2427800700B9EBA0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		0497B71E2427861800B9EBA0 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		049E00F62426327B002E0933 /* MemoryBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049E00F92426327B002E0933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		049E00FB2426327B002E0933 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +54,7 @@
 		049E01102426328F002E0933 /* MemoryBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBoxTests.swift; sourceTree = "<group>"; };
 		049E01122426328F002E0933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		049E011D24263C0F002E0933 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		049E011F24263C37002E0933 /* MemoriesViewControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesViewControllerViewController.swift; sourceTree = "<group>"; };
+		049E011F24263C37002E0933 /* MemoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesViewController.swift; sourceTree = "<group>"; };
 		049E012124263CFC002E0933 /* MemoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
 		049E012524264613002E0933 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		049E012924264937002E0933 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -71,9 +81,21 @@
 		0497B71224268DDF00B9EBA0 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
-				049E011F24263C37002E0933 /* MemoriesViewControllerViewController.swift */,
+				049E011F24263C37002E0933 /* MemoriesViewController.swift */,
+				049E012124263CFC002E0933 /* MemoryCell.swift */,
+				0497B71E2427861800B9EBA0 /* SectionHeaderView.swift */,
+				04165CEA2428D76A0030C153 /* MemoriesViewModel.swift */,
 			);
 			path = Memory;
+			sourceTree = "<group>";
+		};
+		0497B71824277F6700B9EBA0 /* Extenssions */ = {
+			isa = PBXGroup;
+			children = (
+				0497B71A2427800700B9EBA0 /* UIView+Extensions.swift */,
+				043752E02428FD6E004765C2 /* UIImage+Extensions.swift */,
+			);
+			path = Extenssions;
 			sourceTree = "<group>";
 		};
 		049E00ED2426327B002E0933 = {
@@ -97,12 +119,14 @@
 		049E00F82426327B002E0933 /* MemoryBox */ = {
 			isa = PBXGroup;
 			children = (
+				0497B71824277F6700B9EBA0 /* Extenssions */,
 				049E0124242645E9002E0933 /* Application */,
 				049E0127242648D6002E0933 /* Scenes */,
+				0497B71624269B2400B9EBA0 /* PermissionHandler.swift */,
+				04165CE82428D0930030C153 /* MemoriesManager.swift */,
 				049E01022426328E002E0933 /* Assets.xcassets */,
 				049E01042426328E002E0933 /* LaunchScreen.storyboard */,
 				049E01072426328E002E0933 /* Info.plist */,
-				049E012124263CFC002E0933 /* MemoryCell.swift */,
 			);
 			path = MemoryBox;
 			sourceTree = "<group>";
@@ -131,7 +155,6 @@
 			children = (
 				049E0128242648ED002E0933 /* Welcome */,
 				0497B71224268DDF00B9EBA0 /* Memory */,
-				0497B71624269B2400B9EBA0 /* PermissionHandler.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -246,11 +269,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049E012024263C37002E0933 /* MemoriesViewControllerViewController.swift in Sources */,
+				04165CE92428D0930030C153 /* MemoriesManager.swift in Sources */,
+				049E012024263C37002E0933 /* MemoriesViewController.swift in Sources */,
+				04165CEB2428D76A0030C153 /* MemoriesViewModel.swift in Sources */,
+				043752E12428FD6F004765C2 /* UIImage+Extensions.swift in Sources */,
 				0497B7142426916800B9EBA0 /* WelcomeViewModel.swift in Sources */,
+				0497B71B2427800700B9EBA0 /* UIView+Extensions.swift in Sources */,
 				049E011E24263C0F002E0933 /* WelcomeViewController.swift in Sources */,
 				049E00FA2426327B002E0933 /* AppDelegate.swift in Sources */,
 				0497B71724269B2400B9EBA0 /* PermissionHandler.swift in Sources */,
+				0497B71F2427861800B9EBA0 /* SectionHeaderView.swift in Sources */,
 				049E00FC2426327B002E0933 /* SceneDelegate.swift in Sources */,
 				049E012624264613002E0933 /* AppFlowCoordinator.swift in Sources */,
 				049E012224263CFC002E0933 /* MemoryCell.swift in Sources */,

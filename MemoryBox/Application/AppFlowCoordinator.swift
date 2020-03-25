@@ -6,15 +6,19 @@
 //  Copyright © 2020 Krystyna Kruchkovska. All rights reserved.
 //
 
+import AVFoundation
+import Photos
+import Speech
 import UIKit
 
 class Coordinator {
-        var rootViewController = UIViewController()
+    var rootViewController = UIViewController()
 }
 
 class AppFlowCoordinator: Coordinator {
 
     private let window: UIWindow
+    private var isPermissionAuthorized = false
 
     init(window: UIWindow) {
         self.window = window
@@ -26,7 +30,21 @@ class AppFlowCoordinator: Coordinator {
         rootViewController = navigationController
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
-        runMainScreen()
+        checkPermissions()
+        
+        if isPermissionAuthorized {
+            runMemoriesViewController()
+        } else {
+            runMainScreen()
+        }
+    }
+    
+    func checkPermissions() {
+        let photosAuthorized = PHPhotoLibrary.authorizationStatus() == .authorized
+        let recordingAuthorized = AVAudioSession.sharedInstance().recordPermission == .granted
+        let transcibeAuthorized = SFSpeechRecognizer.authorizationStatus() == .authorized
+
+        isPermissionAuthorized = photosAuthorized && recordingAuthorized && transcibeAuthorized
     }
 
     private func runMainScreen() {
@@ -36,20 +54,41 @@ class AppFlowCoordinator: Coordinator {
        
     }
     
-    fileprivate func runMemoryViewController() {
-        print("runMemoryViewController is CALLED")
-        
+    fileprivate func runMemoriesViewController() {
+        let viewModel = MemoriesViewModel(memoriesManager: MemoriesManager())
+        let memoriesVC = MemoriesViewController(viewModel: viewModel, delegate: self )
+        memoriesVC.title = ControllerTitle.memoriesVC.rawValue
+        rootViewController.show(memoriesVC, sender: nil)
+    }
+    
+    fileprivate func presentImagePickerController() {
+        let vc = UIImagePickerController()
+            vc.modalPresentationStyle = .formSheet
+        if let navigationVc = rootViewController as? UINavigationController {
+            guard let memoriesVc = navigationVc.visibleViewController as? MemoriesViewController else { return }
+            vc.delegate = memoriesVc
+        }
+        rootViewController.present(vc, animated: true)
     }
 }
 
 extension AppFlowCoordinator: WelcomeViewControllerdelegate {
     func continuePressed() {
-        runMemoryViewController()
+        runMemoriesViewController()
     }
+}
+
+extension AppFlowCoordinator: MemoriesViewControllerDelegate {
+    func addImageTapped() {
+        presentImagePickerController()
+    }
+    
+    
 }
 
 
 enum ControllerTitle: String {
     case welcomeVC = "Welcome"
+    case memoriesVC = "Memory Box"
 }
 
