@@ -7,23 +7,31 @@
 //
 
 import UIKit
+import Speech
 
 protocol MemoriesManagerProtocol {
     func loadMemories(complition: @escaping (_ complited: Bool) -> ())
     func saveNewMemory(image: UIImage)
-    func appendingPathExtension(_ path: PathExtension, for memory: URL) -> URL
+    func recordMemory()
     var filteredMemories: [URL] { get }
+    var recorderDelegate: AVAudioRecorderDelegate? { get set }
+    var audioManager : AudioManager { get }
 }
 
 class MemoriesManager: MemoriesManagerProtocol {
     
-    private var memories = [URL]()
+    var recorderDelegate: AVAudioRecorderDelegate? = nil
     public private(set) var filteredMemories = [URL]()
-    
+    public private(set) var audioManager : AudioManager
+    private var memories = [URL]()
     private var  memoryName : String {
         return "memory-\(Date().timeIntervalSince1970))"
     }
-    
+
+    init(){
+        self.audioManager = AudioManager()
+    }
+
     func loadMemories(complition: @escaping (_ complited: Bool) -> ()) {
         memories.removeAll()
         guard let files = try? FileManager.default.contentsOfDirectory(at: getDocumentsDirectory(), includingPropertiesForKeys: nil, options: []) else {
@@ -32,8 +40,8 @@ class MemoriesManager: MemoriesManagerProtocol {
         for file in files {
             let fileName = file.lastPathComponent
             
-            if fileName.hasSuffix(".thumb") {
-                let noExtensions = fileName.replacingOccurrences(of: ".thumb", with: "")
+            if fileName.hasSuffix(".\(PathExtension.thumbnail)") {
+                let noExtensions = fileName.replacingOccurrences(of: ".\(PathExtension.thumbnail)", with: "")
                 let memoryPath = getDocumentsDirectory().appendingPathComponent(noExtensions)
                 
                 memories.append(memoryPath)
@@ -45,8 +53,8 @@ class MemoriesManager: MemoriesManagerProtocol {
     }
     
     func saveNewMemory(image: UIImage) {
-        let imageName = memoryName + ".jpeg"
-        let thumbnailName = memoryName + ".thumb"
+        let imageName = memoryName + ".\(PathExtension.image)"
+        let thumbnailName = memoryName + ".\(PathExtension.thumbnail)"
         
         do {
             let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
@@ -67,17 +75,11 @@ class MemoriesManager: MemoriesManagerProtocol {
         
     }
     
-    func appendingPathExtension(_ path: PathExtension, for memory: URL) -> URL {
-        return memory.appendingPathExtension(path.rawValue)
-    }
-    
-    private func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
+    func recordMemory() {
+        guard let delegate = recorderDelegate else { return }
+        audioManager.recordAudio(recorderDelegate: delegate)
     }
 }
-
 
 enum PathExtension: String {
     case image = "jpeg"

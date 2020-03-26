@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import Speech
 
 class MemoriesViewModel {
     var memoriesManager: MemoriesManagerProtocol!
+    var recordDelegate: AVAudioRecorderDelegate!
+        
     
-    init(memoriesManager: MemoriesManagerProtocol){
+    init(memoriesManager: MemoriesManagerProtocol ){
         self.memoriesManager = memoriesManager
+        self.memoriesManager.recorderDelegate = recordDelegate
     }
     
     func loadMemories(complition: @escaping (_ complited: Bool) -> ()) {

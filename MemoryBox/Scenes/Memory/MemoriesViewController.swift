@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Speech
 
 protocol MemoriesViewControllerDelegate {
     func addImageTapped()
@@ -29,6 +30,7 @@ class MemoriesViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCollectionClasses()
+        viewModel.recordDelegate = self
         viewModel.loadMemories { [unowned self] _ in
              self.collectionView.reloadSections(IndexSet(integer: 1))
         }
@@ -38,20 +40,7 @@ class MemoriesViewController: UICollectionViewController {
     @objc func addTapped() {
         delegate.addImageTapped()
     }
-    
-    @objc func memoryLongPress(sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            let cell = sender.view as! MemoryCell
-
-//            if let index = collectionView?.indexPath(for: cell) {
-//                activeMemory = filteredMemories[index.row]
-//                recordMemory()
-//            }
-//        } else if sender.state == .ended {
-//            finishRecording(success: true)
-       }
-    }
-    
+        
     private func registerCollectionClasses() {
         collectionView!.register(MemoryCell.self, forCellWithReuseIdentifier: MemoryCell.reuseIdentifier)
         collectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: SectionHeaderView.headerId)
@@ -75,19 +64,9 @@ class MemoriesViewController: UICollectionViewController {
             fatalError()
         }
         let memory = viewModel.memoriesManager.filteredMemories[indexPath.row]
-        let imageName = viewModel.memoriesManager.appendingPathExtension(.thumbnail, for: memory).path
-        let image = UIImage(contentsOfFile: imageName)
+        let imageThumbnail = urlWithPathExtension(.thumbnail, for: memory).path
+        let image = UIImage(contentsOfFile: imageThumbnail)
         cell.imageView.image = image
-
-        if cell.gestureRecognizers == nil {
-            let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(memoryLongPress))
-            recognizer.minimumPressDuration = 0.25
-            cell.addGestureRecognizer(recognizer)
-
-            cell.layer.borderColor = UIColor.white.cgColor
-            cell.layer.borderWidth = 3
-            cell.layer.cornerRadius = 10
-        }
        
         return cell
     }
@@ -119,7 +98,7 @@ extension MemoriesViewController: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView:UICollectionView, layout: UICollectionViewLayout, referenceSizeForHeaderInSection: Int) -> CGSize
     {
-        if referenceSizeForHeaderInSection > 0 {
+        if referenceSizeForHeaderInSection == 1 {
             return CGSize.zero
         }
         return CGSize(width:0, height:50)
@@ -128,4 +107,23 @@ extension MemoriesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 200, height: 200)
     }
+}
+
+extension MemoriesViewController: CollectionViewDelegate {
+    func memoryPressed(sender: UITapGestureRecognizer) {
+        if sender.state == .began {
+            let cell = sender.view as! MemoryCell
+            if let index = collectionView?.indexPath(for: cell) {
+                viewModel.memoriesManager.audioManager.activeMemory = viewModel.memoriesManager.filteredMemories[index.row]
+                
+                viewModel.memoriesManager.recordMemory()
+            }
+                    } else if sender.state == .ended {
+            viewModel.memoriesManager.audioManager.finishRecording(success: true)
+        }
+    }
+}
+
+extension MemoriesViewController: AVAudioRecorderDelegate {
+    
 }
