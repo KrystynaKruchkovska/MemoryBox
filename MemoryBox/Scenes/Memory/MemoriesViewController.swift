@@ -17,10 +17,14 @@ class MemoriesViewController: UICollectionViewController {
     
     private var viewModel: MemoriesViewModel!
     private var delegate: MemoriesViewControllerDelegate
+    private var objectFlowLayout: UICollectionViewDelegateFlowLayout
+    private var objectDataSource: UICollectionViewDataSource
     
     init(viewModel: MemoriesViewModel, delegate: MemoriesViewControllerDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
+        self.objectFlowLayout = ObjectFlowLayout()
+        self.objectDataSource = ObjectDataSource(viewModel: viewModel)
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     required init?(coder: NSCoder) {
@@ -29,6 +33,8 @@ class MemoriesViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.dataSource = objectDataSource
+        collectionView.delegate = objectFlowLayout
         registerCollectionClasses()
         viewModel.recordDelegate = self
         viewModel.loadMemories { [unowned self] _ in
@@ -45,61 +51,6 @@ class MemoriesViewController: UICollectionViewController {
         collectionView!.register(MemoryCell.self, forCellWithReuseIdentifier: MemoryCell.reuseIdentifier)
         collectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: SectionHeaderView.headerId)
     }
-    
-    // MARK: UICollectionViewDataSource
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 0
-        }
-        return viewModel.memoriesManager.filteredMemories.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemoryCell.reuseIdentifier, for: indexPath) as? MemoryCell else {
-            fatalError()
-        }
-        let memory = viewModel.memoriesManager.filteredMemories[indexPath.row]
-        let imageThumbnail = urlWithPathExtension(.thumbnail, for: memory).path
-        let image = UIImage(contentsOfFile: imageThumbnail)
-        cell.imageView.image = image
-       
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.headerId, for: indexPath) as? SectionHeaderView else {
-            fatalError("header as SectionHeaderView failed")
-        }
-        return header
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let memory = viewModel.memoriesManager.filteredMemories[indexPath.row]
-        let fm = FileManager.default
-
-        do {
-            let audioName = urlWithPathExtension(.audio, for: memory)
-            let transcriptionName = urlWithPathExtension(.transcription, for: memory)
-            var audioPlayer = viewModel.memoriesManager.audioManager.audioPlayer
-
-            if fm.fileExists(atPath: audioName.path) {
-                audioPlayer = try AVAudioPlayer(contentsOf: audioName)
-                audioPlayer?.play()
-            }
-
-            if fm.fileExists(atPath: transcriptionName.path) {
-                let contents = try String(contentsOf: transcriptionName)
-                print(contents)
-            }
-        } catch {
-            assert(false, "Error loading audio")
-        }
-    }
 }
 
 extension MemoriesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -115,22 +66,6 @@ extension MemoriesViewController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
-
-extension MemoriesViewController: UICollectionViewDelegateFlowLayout {
-    
-    public func collectionView(_ collectionView:UICollectionView, layout: UICollectionViewLayout, referenceSizeForHeaderInSection: Int) -> CGSize
-    {
-        if referenceSizeForHeaderInSection == 1 {
-            return CGSize.zero
-        }
-        return CGSize(width:0, height:50)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
-    }
-}
 
 extension MemoriesViewController: CollectionViewDelegate {
     func memoryPressed(sender: UITapGestureRecognizer) {
