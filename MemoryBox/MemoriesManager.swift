@@ -40,8 +40,8 @@ class MemoriesManager: MemoriesManagerProtocol {
         for file in files {
             let fileName = file.lastPathComponent
             
-            if fileName.hasSuffix(".\(PathExtension.thumbnail)") {
-                let noExtensions = fileName.replacingOccurrences(of: ".\(PathExtension.thumbnail)", with: "")
+            if fileName.hasSuffix(".\(PathExtension.thumbnail.rawValue)") {
+                let noExtensions = fileName.replacingOccurrences(of: ".\(PathExtension.thumbnail.rawValue)", with: "")
                 let memoryPath = getDocumentsDirectory().appendingPathComponent(noExtensions)
                 
                 memories.append(memoryPath)
@@ -53,8 +53,8 @@ class MemoriesManager: MemoriesManagerProtocol {
     }
     
     func saveNewMemory(image: UIImage) {
-        let imageName = memoryName + ".\(PathExtension.image)"
-        let thumbnailName = memoryName + ".\(PathExtension.thumbnail)"
+        let imageName = memoryName + ".\(PathExtension.image.rawValue)"
+        let thumbnailName = memoryName + ".\(PathExtension.thumbnail.rawValue)"
         
         do {
             let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)

@@ -12,14 +12,21 @@ class AudioManager {
     
     var audioRecorder: AVAudioRecorder?
     var activeMemory: URL?
+    var audioPlayer: AVAudioPlayer?
+    private var searchSpotlightManager: SearchSpotlightManager
+    
+    init(){
+           self.searchSpotlightManager = SearchSpotlightManager()
+       }
     
     private var recordingURL: URL {
         return getDocumentsDirectory().appendingPathComponent("recording.m4a")
     }
     
     func recordAudio(recorderDelegate: AVAudioRecorderDelegate) {
-        let recordingSession = AVAudioSession.sharedInstance()
+        audioPlayer?.stop()
         
+        let recordingSession = AVAudioSession.sharedInstance()
         do {
             try recordingSession.setCategory(.playAndRecord, mode: .default, options: .defaultToSpeaker)
             try recordingSession.setActive(true)
@@ -30,12 +37,11 @@ class AudioManager {
                 AVNumberOfChannelsKey: 2,
                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
             ]
-            
             audioRecorder = try AVAudioRecorder(url: recordingURL, settings: settings)
             audioRecorder?.delegate = recorderDelegate
             audioRecorder?.record()
         } catch let error {
-            fatalError("Failed to record: \(error)")
+            assert(false, "Failed to record: \(error)")
         }
     }
     
@@ -58,29 +64,28 @@ class AudioManager {
                 
                 transcribeAudio(memory: activeMemory)
             } catch let error {
-                print("Failure finishing recording: \(error)")
+                assert(false, "Failure finishing recording: \(error)")
             }
         }
     }
     
     func transcribeAudio(memory: URL) {
-        let audio = urlWithPathExtension(.audio, for: memory)
-        
-        let transcription = urlWithPathExtension(.transcription, for: memory)
+        let memoryAudioUrl = urlWithPathExtension(.audio, for: memory)
+        let memoryTranscriptionUrl = urlWithPathExtension(.transcription, for: memory)
         
         let recognizer = SFSpeechRecognizer()
-        let request = SFSpeechURLRecognitionRequest(url: audio)
-        recognizer?.recognitionTask(with: request) { (result, error) in
+        let request = SFSpeechURLRecognitionRequest(url: memoryAudioUrl)
+        recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in
             guard let result = result else {
-                fatalError("There was an error: \(error!)")
+                assert(false, "There was an error: \(error!)")
             }
             if result.isFinal {
                 let text = result.bestTranscription.formattedString
                 do {
-                    try text.write(to: transcription, atomically: true, encoding: String.Encoding.utf8)
-                    //self.indexMemory(memory: memory, text: text)
+                    try text.write(to: memoryTranscriptionUrl, atomically: true, encoding: String.Encoding.utf8)
+                    self.searchSpotlightManager.indexMemory(memory: memory, text: text)
                 } catch {
-                    print("Failed to save transcription.")
+                    assert(false, "Failed to save transcription.")
                 }
             }
         }

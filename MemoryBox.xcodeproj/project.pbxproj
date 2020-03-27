@@ -12,6 +12,7 @@
 		043752E12428FD6F004765C2 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043752E02428FD6E004765C2 /* UIImage+Extensions.swift */; };
 		047BC246242CE29400BD5DF1 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BC245242CE29300BD5DF1 /* AudioManager.swift */; };
 		047BC248242CF07E00BD5DF1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BC247242CF07E00BD5DF1 /* Utilities.swift */; };
+		047BC24A242E271B00BD5DF1 /* SearchSpotlightManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BC249242E271B00BD5DF1 /* SearchSpotlightManager.swift */; };
 		0497B7142426916800B9EBA0 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B7132426916800B9EBA0 /* WelcomeViewModel.swift */; };
 		0497B71724269B2400B9EBA0 /* PermissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B71624269B2400B9EBA0 /* PermissionHandler.swift */; };
 		0497B71B2427800700B9EBA0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497B71A2427800700B9EBA0 /* UIView+Extensions.swift */; };
@@ -44,6 +45,7 @@
 		043752E02428FD6E004765C2 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		047BC245242CE29300BD5DF1 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		047BC247242CF07E00BD5DF1 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		047BC249242E271B00BD5DF1 /* SearchSpotlightManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSpotlightManager.swift; sourceTree = "<group>"; };
 		0497B7132426916800B9EBA0 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		0497B71624269B2400B9EBA0 /* PermissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionHandler.swift; sourceTree = "<group>"; };
 		0497B71A2427800700B9EBA0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				0497B71624269B2400B9EBA0 /* PermissionHandler.swift */,
 				04165CE82428D0930030C153 /* MemoriesManager.swift */,
 				047BC245242CE29300BD5DF1 /* AudioManager.swift */,
+				047BC249242E271B00BD5DF1 /* SearchSpotlightManager.swift */,
 				049E01022426328E002E0933 /* Assets.xcassets */,
 				049E01042426328E002E0933 /* LaunchScreen.storyboard */,
 				049E01072426328E002E0933 /* Info.plist */,
@@ -291,6 +294,7 @@
 				047BC248242CF07E00BD5DF1 /* Utilities.swift in Sources */,
 				049E012224263CFC002E0933 /* MemoryCell.swift in Sources */,
 				049E012A24264937002E0933 /* WelcomeView.swift in Sources */,
+				047BC24A242E271B00BD5DF1 /* SearchSpotlightManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

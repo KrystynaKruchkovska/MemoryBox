@@ -77,6 +77,29 @@ class MemoriesViewController: UICollectionViewController {
         }
         return header
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let memory = viewModel.memoriesManager.filteredMemories[indexPath.row]
+        let fm = FileManager.default
+
+        do {
+            let audioName = urlWithPathExtension(.audio, for: memory)
+            let transcriptionName = urlWithPathExtension(.transcription, for: memory)
+            var audioPlayer = viewModel.memoriesManager.audioManager.audioPlayer
+
+            if fm.fileExists(atPath: audioName.path) {
+                audioPlayer = try AVAudioPlayer(contentsOf: audioName)
+                audioPlayer?.play()
+            }
+
+            if fm.fileExists(atPath: transcriptionName.path) {
+                let contents = try String(contentsOf: transcriptionName)
+                print(contents)
+            }
+        } catch {
+            assert(false, "Error loading audio")
+        }
+    }
 }
 
 extension MemoriesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -115,10 +138,9 @@ extension MemoriesViewController: CollectionViewDelegate {
             let cell = sender.view as! MemoryCell
             if let index = collectionView?.indexPath(for: cell) {
                 viewModel.memoriesManager.audioManager.activeMemory = viewModel.memoriesManager.filteredMemories[index.row]
-                
                 viewModel.memoriesManager.recordMemory()
             }
-                    } else if sender.state == .ended {
+        } else if sender.state == .ended {
             viewModel.memoriesManager.audioManager.finishRecording(success: true)
         }
     }
@@ -126,4 +148,9 @@ extension MemoriesViewController: CollectionViewDelegate {
 
 extension MemoriesViewController: AVAudioRecorderDelegate {
     
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            viewModel.memoriesManager.audioManager.finishRecording(success: false)
+        }
+    }
 }
